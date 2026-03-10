@@ -1,0 +1,546 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+/* Contenedor principal */
+.main-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+/* Área de fondo - PERSONALIZA ESTA SECCIÓN CON TU IMAGEN DE FONDO */
+.background-area {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.background-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(102, 126, 234, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* Contenedor del formulario */
+.form-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    margin: 20px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Logo - PERSONALIZA ESTA SECCIÓN CON TU LOGO */
+.logo-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo image sizing */
+.logo-placeholder img {
+    max-width: 160px;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.logo-placeholder i {
+    font-size: 3rem;
+    color: #4CAF50;
+    /* Reemplaza este icono con tu logo:
+    display: none; (oculta el icono)
+    */
+}
+
+.logo-placeholder h1 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    font-weight: 600;
+    /* Si tienes logo imagen, puedes ocultar este texto con:
+    display: none;
+    */
+}
+
+/* Si quieres usar una imagen de logo, descomenta y personaliza:
+.logo-container img {
+    max-width: 200px;
+    height: auto;
+}
+*/
+
+/* Título del formulario */
+.form-title {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+/* Formulario */
+.login-form {
+    margin-bottom: 25px;
+}
+
+/* Grupos de input */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 15px;
+    color: #6c757d;
+    font-size: 1rem;
+    z-index: 1;
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.input-icon input:focus {
+    border-color: #4CAF50;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.1);
+}
+
+.input-icon input::placeholder {
+    color: #6c757d;
+    opacity: 0.8;
+}
+
+/* Botón de mostrar/ocultar contraseña */
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: #4CAF50;
+}
+
+/* Opciones del formulario */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Checkbox personalizado */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #6c757d;
+    user-select: none;
+}
+
+.checkbox-container input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #e9ecef;
+    border-radius: 4px;
+    margin-right: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.checkmark::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+    opacity: 1;
+}
+
+/* Link de contraseña olvidada */
+.forgot-password {
+    color: #4CAF50;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: #45a049;
+    text-decoration: underline;
+}
+
+/* Botón de login */
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+/* Texto de registro */
+.register-text {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.register-link {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.register-link:hover {
+    color: #45a049;
+    text-decoration: underline;
+}
+
+/* Separador */
+.separator {
+    text-align: center;
+    margin: 25px 0;
+    position: relative;
+}
+
+.separator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e9ecef;
+}
+
+.separator span {
+    background: rgba(255, 255, 255, 0.95);
+    color: #6c757d;
+    padding: 0 15px;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+/* Botones de redes sociales */
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border: 2px solid;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.facebook-btn {
+    background: #fff;
+    color: #1877f2;
+    border-color: #1877f2;
+}
+
+.facebook-btn:hover {
+    background: #1877f2;
+    color: white;
+}
+
+.google-btn {
+    background: #fff;
+    color: #db4437;
+    border-color: #db4437;
+}
+
+.google-btn:hover {
+    background: #db4437;
+    color: white;
+}
+
+.apple-btn {
+    background: #fff;
+    color: #000;
+    border-color: #000;
+}
+
+.apple-btn:hover {
+    background: #000;
+    color: white;
+}
+
+/* Links legales */
+.legal-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.legal-links a {
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+.legal-links a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+    
+    .background-area {
+        min-height: 200px;
+        flex: none;
+    }
+    
+    .form-container {
+        margin: 10px;
+        padding: 30px 25px;
+        border-radius: 15px;
+    }
+    
+    .logo-placeholder h1 {
+        font-size: 1.5rem;
+    }
+    
+    .form-title {
+        font-size: 1.3rem;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .legal-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 25px 20px;
+    }
+    
+    .input-icon input {
+        padding: 12px 12px 12px 40px;
+    }
+    
+    .login-btn {
+        padding: 12px;
+    }
+    
+    .social-btn {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Animaciones adicionales */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-container {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Efectos de hover mejorados */
+.input-icon:hover input {
+    border-color: #4CAF50;
+}
+
+.form-container:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para alertas */
+.alert {
+    margin-bottom: 20px;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: slideInDown 0.3s ease-out;
+    overflow: hidden;
+}
+
+.alert-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.alert-error {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    color: white;
+}
+
+.alert-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    margin-left: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.alert-close:hover {
+    opacity: 1;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estado de focus mejorado */
+.input-focused {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
