@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Inicio - FacturaSmart</title>
+
+	<!-- TIP: si quieres usar tu CSS global, puedes enlazarlo aquí -->
+	<!-- <link rel="stylesheet" href="../../index.css"> -->
+
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		}
+
+		body {
+			background: #f3f5fb;
+			color: #1f2933;
+		}
+
+		.app {
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		/* ---------------- HEADER ---------------- */
+		.header {
+			background: #ffffff;
+			border-bottom: 1px solid #e4e7eb;
+			padding: 14px 32px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			position: sticky;
+			top: 0;
+			z-index: 10;
+		}
+
+		.header-left {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.header-logo {
+			width: 42px;
+			height: 42px;
+			border-radius: 10px;
+			background: #e3f5ff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+		}
+
+		.header-logo img {
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+		}
+
+		.header-title {
+			display: flex;
+			flex-direction: column;
+			line-height: 1.1;
+		}
+
+		.header-title span:first-child {
+			font-weight: 700;
+			color: #1c4f82;
+		}
+
+		.header-title span:last-child {
+			font-size: 0.78rem;
+			color: #7b8794;
+		}
+
+		.header-nav {
+			display: flex;
+			gap: 28px;
+			align-items: center;
+		}
+
+		.header-nav a {
+			text-decoration: none;
+			font-size: 0.95rem;
+			color: #7b8794;
+			position: relative;
+			padding-bottom: 4px;
+		}
+
+		.header-nav a.active {
+			color: #1c4f82;
+			font-weight: 600;
+		}
+
+		.header-nav a.active::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: -6px;
+			height: 3px;
+			border-radius: 999px;
+			background: #1c9b5d;
+		}
+
+		.header-right {
+			display: flex;
+			align-items: center;
+			gap: 18px;
+		}
+
+		.header-icon {
+			width: 34px;
+			height: 34px;
+			border-radius: 50%;
+			border: 1px solid #d8e2ec;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 18px;
+			color: #7b8794;
+		}
+
+		.user-menu {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.user-avatar {
+			width: 36px;
+			height: 36px;
+			border-radius: 999px;
+			overflow: hidden;
+			background: #d8e2ec;
+		}
+
+		.user-avatar img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.user-info {
+			display: flex;
+			flex-direction: column;
+			font-size: 0.82rem;
+		}
+
+		.user-info span:first-child {
+			color: #9fb3c8;
+		}
+
+		.user-info span:last-child {
+			font-weight: 600;
+			color: #1f2933;
+		}
+
+		/* ---------------- CONTENIDO PRINCIPAL ---------------- */
+		.content {
+			max-width: 1120px;
+			margin: 0 auto;
+			padding: 24px 20px 40px;
+			flex: 1;
+		}
+
+		.hero {
+			background: linear-gradient(90deg, #e9f4ff 0%, #f5fbff 70%);
+			border-radius: 16px;
+			padding: 26px 28px 30px;
+			margin-bottom: 26px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hero::after {
+			content: "";
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 260px;
+			height: 120px;
+			background: url("https://dummyimage.com/520x240/dae5ff/f3f6ff");
+			opacity: 0.35;
+			pointer-events: none;
+		}
+
+		.hero-title {
+			font-size: 1.8rem;
+			color: #1c4f82;
+			margin-bottom: 8px;
+		}
+
+		.hero-title span {
+			color: #1c9b5d;
+		}
+
+		.hero-subtitle {
+			font-size: 0.98rem;
+			color: #7b8794;
+			margin-bottom: 22px;
+		}
+
+		.hero-actions {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.btn-primary {
+			background: #17a34a;
+			color: #ffffff;
+			border-radius: 999px;
+			padding: 12px 28px;
+			border: none;
+			font-size: 0.98rem;
+			font-weight: 600;
+			cursor: pointer;
+			box-shadow: 0 8px 18px rgba(23, 163, 74, 0.35);
+			transition: transform 0.12s ease, box-shadow 0.12s ease;
+		}
+
+		.btn-primary:hover {
+			transform: translateY(-1px);
+			box-shadow: 0 12px 22px rgba(23, 163, 74, 0.45);
+		}
+
+		/* ---------------- TARJETAS SUPERIORES ---------------- */
+		.features-row {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 18px;
+			margin-bottom: 26px;
+		}
+
+		.feature-card {
+			background: #ffffff;
+			border-radius: 14px;
+			padding: 18px 20px;
+			box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 8px;
+		}
+
+		.feature-icon {
+			width: 52px;
+			height: 52px;
+			border-radius: 14px;
+			background: #e5f3ff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+			margin-bottom: 4px;
+		}
+
+		.feature-icon img {
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+		}
+
+		.feature-title {
+			font-size: 1rem;
+			font-weight: 600;
+			color: #102a43;
+		}
+
+		.feature-text {
+			font-size: 0.88rem;
+			color: #7b8794;
+		}
+
+		/* ---------------- TABLA PROCESAMIENTO ---------------- */
+		.section-title {
+			font-size: 1.05rem;
+			font-weight: 600;
+			color: #102a43;
+			margin-bottom: 12px;
+		}
+
+		.card-table {
+			background: #ffffff;
+			border-radius: 14px;
+			box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+			overflow: hidden;
+			margin-bottom: 22px;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 0.9rem;
+		}
+
+		thead {
+			background: #f5f7fa;
+		}
+
+		th,
+		td {
+			padding: 12px 18px;
+			text-align: left;
+		}
+
+		th {
+			font-weight: 600;
+			color: #6b7785;
+			font-size: 0.83rem;
+			text-transform: uppercase;
+		}
+
+		tbody tr:nth-child(even) {
+			background: #f9fbff;
+		}
+
+		tbody tr:hover {
+			background: #eef4ff;
+		}
+
+		.status-badge {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			padding: 4px 12px;
+			border-radius: 999px;
+			font-size: 0.78rem;
+			font-weight: 600;
+			color: #ffffff;
+		}
+
+		.status-procesado {
+			background: #17a34a;
+		}
+
+		.status-proceso {
+			background: #f59e0b;
+		}
+
+		.status-error {
+			background: #ef4444;
+		}
+
+		.status-completado {
+			background: #2563eb;
+		}
+
+		.btn-secondary {
+			border-radius: 999px;
+			border: none;
+			background: #1d4ed8;
+			color: #fff;
+			padding: 8px 16px;
+			font-size: 0.8rem;
+			font-weight: 600;
+			cursor: pointer;
+		}
+
+		/* ---------------- TARJETAS INFERIORES ---------------- */
+		.bottom-row {
+			display: grid;
+			grid-template-columns: minmax(0, 2fr) minmax(0, 2fr);
+			gap: 18px;
+		}
+
+		.info-card {
+			background: #ffffff;
+			border-radius: 14px;
+			padding: 18px 20px;
+			box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+			display: flex;
+			gap: 14px;
+			align-items: center;
+		}
+
+		.info-icon {
+			width: 50px;
+			height: 50px;
+			border-radius: 999px;
+			background: #e5f0ff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+			flex-shrink: 0;
+		}
+
+		.info-icon img {
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+		}
+
+		.info-body h3 {
+			font-size: 1rem;
+			margin-bottom: 4px;
+			color: #102a43;
+		}
+
+		.info-body p {
+			font-size: 0.86rem;
+			color: #7b8794;
+		}
+
+		@media (max-width: 900px) {
+			.header {
+				padding-inline: 16px;
+			}
+
+			.header-nav {
+				display: none;
+			}
+
+			.content {
+				padding-inline: 16px;
+			}
+
+			.features-row {
+				grid-template-columns: 1fr;
+			}
+
+			.bottom-row {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		@media (max-width: 600px) {
+			.hero {
+				padding: 20px 18px 22px;
+			}
+
+			.hero-title {
+				font-size: 1.4rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="app">
+		<!-- HEADER -->
+		<header class="header">
+			<div class="header-left">
+				<div class="header-logo">
+					<!-- LOGO PRINCIPAL: reemplaza # con el link de tu logo -->
+					<img src="#" alt="Logo FacturaSmart">
+				</div>
+				<div class="header-title">
+					<span>FacturaSmart</span>
+					<span>Gestión de facturas electrónicas</span>
+				</div>
+			</div>
+
+			<nav class="header-nav">
+				<a href="#" class="active">Inicio</a>
+				<a href="#">Historial</a>
+				<a href="#">Exportar a Excel</a>
+			</nav>
+
+			<div class="header-right">
+				<div class="header-icon">🔔</div>
+				<div class="user-menu">
+					<div class="user-info">
+						<span>Hola,</span>
+						<span>Juan Pérez</span>
+					</div>
+					<div class="user-avatar">
+						<!-- AVATAR USUARIO: reemplaza # con el link de la foto -->
+						<img src="#" alt="Foto de usuario">
+					</div>
+				</div>
+				<!-- Enlace simple para cerrar sesión y volver al login -->
+				<a href="../../index.html" style="margin-left:12px;font-size:0.8rem;color:#7b8794;text-decoration:none;font-weight:500;">Cerrar sesión</a>
+			</div>
+		</header>
+
+		<!-- CONTENIDO PRINCIPAL -->
+		<main class="content">
+			<!-- HERO -->
+			<section class="hero">
+				<h1 class="hero-title">¡Bienvenido a <span>FacturaIA</span>!</h1>
+				<p class="hero-subtitle">Gestiona tus facturas electrónicas fácilmente.</p>
+				<div class="hero-actions">
+					<button class="btn-primary">Subir Facturas +</button>
+				</div>
+			</section>
+
+			<!-- TARJETAS SUPERIORES -->
+			<section class="features-row">
+				<article class="feature-card">
+					<div class="feature-icon">
+						<!-- ÍCONO CARGA MASIVA: logo por link -->
+						<img src="#" alt="Icono carga masiva">
+					</div>
+					<h2 class="feature-title">Carga Masiva</h2>
+					<p class="feature-text">Sube múltiples facturas en PDF.</p>
+				</article>
+
+				<article class="feature-card">
+					<div class="feature-icon">
+						<!-- ÍCONO PROCESAMIENTO INTELIGENTE: logo por link -->
+						<img src="#" alt="Icono procesamiento inteligente">
+					</div>
+					<h2 class="feature-title">Procesamiento Inteligente</h2>
+					<p class="feature-text">Extracción automática de datos.</p>
+				</article>
+
+				<article class="feature-card">
+					<div class="feature-icon">
+						<!-- ÍCONO EXPORTACIÓN EXCEL: logo por link -->
+						<img src="#" alt="Icono exportar a Excel">
+					</div>
+					<h2 class="feature-title">Exportación a Excel</h2>
+					<p class="feature-text">Genera reportes contables.</p>
+				</article>
+			</section>
+
+			<!-- TABLA ESTADO DE PROCESAMIENTO -->
+			<section>
+				<h2 class="section-title">Estado de Procesamiento</h2>
+				<div class="card-table">
+					<table>
+						<thead>
+							<tr>
+								<th>Número de Factura</th>
+								<th>Emisor</th>
+								<th>Fecha</th>
+								<th>Estado</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>FAC-10230</td>
+								<td>Distribuciones ABC</td>
+								<td>15/02/2026</td>
+								<td><span class="status-badge status-procesado">Procesado</span></td>
+								<td><button class="btn-secondary">Ver Detalles</button></td>
+							</tr>
+							<tr>
+								<td>FAC-10231</td>
+								<td>Servicios XYZ</td>
+								<td>14/02/2026</td>
+								<td><span class="status-badge status-proceso">En Proceso</span></td>
+								<td><button class="btn-secondary">Ver Detalles</button></td>
+							</tr>
+							<tr>
+								<td>FAC-10218</td>
+								<td>Comercial La 20</td>
+								<td>13/02/2026</td>
+								<td><span class="status-badge status-error">Error</span></td>
+								<td><button class="btn-secondary">Ver Detalles</button></td>
+							</tr>
+							<tr>
+								<td>FAC-10210</td>
+								<td>Electro Hogar S.A.S.</td>
+								<td>12/02/2026</td>
+								<td><span class="status-badge status-completado">Completado</span></td>
+								<td><button class="btn-secondary">Ver Detalles</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<!-- TARJETAS INFERIORES -->
+			<section class="bottom-row">
+				<article class="info-card">
+					<div class="info-icon">
+						<!-- ÍCONO HISTORIAL: logo por link -->
+						<img src="#" alt="Icono historial de facturas">
+					</div>
+					<div class="info-body">
+						<h3>¡Historial de Facturas</h3>
+						<p>Consulta tus facturas anteriores.</p>
+					</div>
+				</article>
+
+				<article class="info-card">
+					<div class="info-icon">
+						<!-- ÍCONO EXPORTAR: logo por link -->
+						<img src="#" alt="Icono exportar a Excel">
+					</div>
+					<div class="info-body">
+						<h3>Exportar a Excel</h3>
+						<p>Descarga tus reportes en formato Excel.</p>
+					</div>
+				</article>
+			</section>
+		</main>
+	</div>
+</body>
+
+</html>
+

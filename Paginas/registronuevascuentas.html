@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Factura Smart</title>
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Pequeña regla local para dejar espacio del header futuro */
+        .header-placeholder {
+            height: 84px;
+            width: 100%;
+        }
+        /* Asegurar que el formulario no quede demasiado ancho en esta carpeta */
+        .form-container { max-width: 520px; }
+    </style>
+</head>
+<body>
+    <!-- Espacio reservado para el header (lo diseñarás luego) -->
+    <div class="header-placeholder" aria-hidden="true"></div>
+
+    <div class="main-container">
+        <div class="background-area" style="background-image: url('https://i.imgur.com/5l2rNsM.png');"></div>
+
+        <div class="form-container">
+            <div class="logo-container">
+                <div class="logo-placeholder">
+                    <img src="https://i.imgur.com/qlfEJ79.png" alt="Factura Smart Logo">
+                </div>
+            </div>
+
+            <h2 class="form-title">Crear cuenta</h2>
+
+            <form id="registerForm" action="../register.php" method="POST" class="login-form">
+                <div class="input-group">
+                    <div class="input-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="correo" name="correo" placeholder="Correo Electrónico" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono (opcional)">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="clave" name="clave" placeholder="Contraseña" required>
+                        <button type="button" class="toggle-password" onclick="togglePasswordField('clave', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmar_clave" name="confirmar_clave" placeholder="Confirmar contraseña" required>
+                        <button type="button" class="toggle-password" onclick="togglePasswordField('confirmar_clave', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn">Crear cuenta</button>
+            </form>
+
+            <p class="register-text">¿Ya tienes una cuenta? <a href="../Index.html" class="register-link">Inicia sesión</a></p>
+        </div>
+    </div>
+
+    <script src="../registrocuentas.js"></script>
+</body>
+</html>

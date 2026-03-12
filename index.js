@@ -16,47 +16,75 @@ function togglePassword() {
     }
 }
 
-// Función para manejar el envío del formulario
+// Función para manejar el envío del formulario (login real contra la API PHP)
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
-    
-    loginForm.addEventListener('submit', function(e) {
+
+    if (!loginForm) return;
+
+    loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
-        const email = document.getElementById('email').value;
+
+        const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
         const remember = document.getElementById('remember').checked;
-        
+
         // Validaciones básicas
         if (!validateEmail(email)) {
             showAlert('Por favor, ingresa un correo electrónico válido.', 'error');
             return;
         }
-        
+
         if (password.length < 6) {
             showAlert('La contraseña debe tener al menos 6 caracteres.', 'error');
             return;
         }
-        
-        // Mostrar carga
+
         showLoading(true);
-        
-        // Simular proceso de login (reemplaza con tu lógica de autenticación)
-        setTimeout(() => {
-            showLoading(false);
-            
-            // Aquí iría tu lógica de autenticación real
-            if (authenticateUser(email, password)) {
-                if (remember) {
-                    localStorage.setItem('rememberUser', email);
-                }
-                showAlert('Inicio de sesión exitoso', 'success');
-                // Redirigir al dashboard o página principal
-                // window.location.href = 'Paginas/dashboard.html';
-            } else {
-                showAlert('Credenciales incorrectas. Inténtalo de nuevo.', 'error');
+
+        try {
+            const respuesta = await fetch('api/post/login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    correo: email,
+                    clave: password
+                })
+            });
+
+            let data = null;
+            try {
+                data = await respuesta.json();
+            } catch (_) {
+                // Si no es JSON, dejamos data en null y mostramos error genérico
             }
-        }, 1500);
+
+            if (!respuesta.ok || !data || data.success === false) {
+                const msg = data && data.message ? data.message : 'Credenciales incorrectas o error en el servidor.';
+                showAlert(msg, 'error');
+                return;
+            }
+
+            if (remember) {
+                localStorage.setItem('rememberUser', email);
+            } else {
+                localStorage.removeItem('rememberUser');
+            }
+
+            showAlert(data.message || 'Inicio de sesión exitoso.', 'success');
+
+            // Redirigir después de un pequeño delay (ajusta la URL según tu proyecto)
+            setTimeout(() => {
+                window.location.href = 'Paginas/registronuevascuentas.html';
+            }, 1500);
+        } catch (error) {
+            console.error('Error al conectar con la API de login:', error);
+            showAlert('No se pudo conectar con el servidor. Inténtalo más tarde.', 'error');
+        } finally {
+            showLoading(false);
+        }
     });
     
     // Cargar email guardado si existe
@@ -71,17 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
-}
-
-// Función simulada de autenticación (reemplaza con tu lógica real)
-function authenticateUser(email, password) {
-    // Esta es una función de ejemplo - reemplaza con tu lógica de autenticación real
-    const validUsers = [
-        { email: 'admin@facturasmart.com', password: '123456' },
-        { email: 'demo@demo.com', password: 'demo123' }
-    ];
-    
-    return validUsers.some(user => user.email === email && user.password === password);
 }
 
 // Función para mostrar alertas
