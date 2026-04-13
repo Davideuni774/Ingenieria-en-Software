@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Inicio - FacturaSmart</title>
+
+	<!-- TIP: si quieres usar tu CSS global, puedes enlazarlo aquí -->
+	<!-- <link rel="stylesheet" href="../../index.css"> -->
+
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		}
+
+		body {
+			background: #f3f5fb;
+			color: #1f2933;
+		}
+
+		.app {
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		/* ---------------- CONTENIDO PRINCIPAL ---------------- */
+		.content {
+			max-width: 1120px;
+			margin: 0 auto;
+			padding: 24px 20px 40px;
+			flex: 1;
+		}
+
+		.hero {
+			background: linear-gradient(90deg, #e9f4ff 0%, #f5fbff 70%);
+			border-radius: 16px;
+			padding: 26px 28px 30px;
+			margin-bottom: 26px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hero::after {
+			content: "";
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 260px;
+			height: 120px;
+			background: url("https://dummyimage.com/520x240/dae5ff/f3f6ff");
+			opacity: 0.35;
+			pointer-events: none;
+		}
+
+		.hero-title {
+			font-size: 1.8rem;
+			color: #1c4f82;
+			margin-bottom: 8px;
+		}
+
+		.hero-title span {
+			color: #1c9b5d;
+		}
+
+		.hero-subtitle {
+			font-size: 0.98rem;
+			color: #7b8794;
+			margin-bottom: 22px;
+		}
+
+		.hero-actions {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.btn-primary {
+			background: #17a34a;
+			color: #ffffff;
+			border-radius: 999px;
+			padding: 12px 28px;
+			border: none;
+			font-size: 0.98rem;
+			font-weight: 600;
+			cursor: pointer;
+			box-shadow: 0 8px 18px rgba(23, 163, 74, 0.35);
+			transition: transform 0.12s ease, box-shadow 0.12s ease;
+		}
+
+		.btn-primary:hover {
+			transform: translateY(-1px);
+			box-shadow: 0 12px 22px rgba(23, 163, 74, 0.45);
+		}
+
+		/* ---------------- TARJETAS SUPERIORES ---------------- */
+		.features-row {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 18px;
+			margin-bottom: 26px;
+		}
+
+		.feature-card {
+			background: #ffffff;
+			border-radius: 14px;
+			padding: 18px 20px;
+			box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 8px;
+		}
+
+		.feature-icon {
+			width: 52px;
+			height: 52px;
+			border-radius: 14px;
+			background: #e5f3ff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+			margin-bottom: 4px;
+		}
+
+		.feature-icon img {
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+		}
+
+		.feature-title {
+			font-size: 1rem;
+			font-weight: 600;
+			color: #102a43;
+		}
+
+		.feature-text {
+			font-size: 0.88rem;
+			color: #7b8794;
+		}
+
+		/* ---------------- TABLA PROCESAMIENTO ---------------- */
+		.section-title {
+			font-size: 1.05rem;
+			font-weight: 600;
+			color: #102a43;
+			margin-bottom: 12px;
+		}
+
+		.card-table {
+			background: #ffffff;
+			border-radius: 14px;
+			box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+			overflow: hidden;
+			margin-bottom: 22px;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 0.9rem;
+		}
+
+		thead {
+			background: #f5f7fa;
+		}
+
+		th,
+		td {
+			padding: 12px 18px;
+			text-align: left;
+		}
+
+		th {
+			font-weight: 600;
+			color: #6b7785;
+			font-size: 0.83rem;
+			text-transform: uppercase;
+		}
+
+		tbody tr:nth-child(even) {
+			background: #f9fbff;
+		}
+
+		tbody tr:hover {
+			background: #eef4ff;
+		}
+
+		.status-badge {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			padding: 4px 12px;
+			border-radius: 999px;
+			font-size: 0.78rem;
+			font-weight: 600;
+			color: #ffffff;
+		}
+
+		.status-procesado {
+			background: #17a34a;
+		}
+
+		.status-proceso {
+			background: #f59e0b;
+		}
+
+		.status-error {
+			background: #ef4444;
+		}
+
+		.status-completado {
+			background: #2563eb;
+		}
+
+		.btn-secondary {
+			border-radius: 999px;
+			border: none;
+			background: #1d4ed8;
+			color: #fff;
+			padding: 8px 16px;
+			font-size: 0.8rem;
+			font-weight: 600;
+			cursor: pointer;
+		}
+
+		/* ---------------- TARJETAS INFERIORES ---------------- */
+		.bottom-row {
+			display: grid;
+			grid-template-columns: minmax(0, 2fr) minmax(0, 2fr);
+			gap: 18px;
+		}
+
+		.info-card {
+			background: #ffffff;
+			border-radius: 14px;
+			padding: 18px 20px;
+			box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+			display: flex;
+			gap: 14px;
+			align-items: center;
+		}
+
+		.info-icon {
+			width: 50px;
+			height: 50px;
+			border-radius: 999px;
+			background: #e5f0ff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+			flex-shrink: 0;
+		}
+
+		.info-icon img {
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+		}
+
+		.info-body h3 {
+			font-size: 1rem;
+			margin-bottom: 4px;
+			color: #102a43;
+		}
+
+		.info-body p {
+			font-size: 0.86rem;
+			color: #7b8794;
+		}
+
+		@media (max-width: 900px) {
+			.header {
+				padding-inline: 16px;
+			}
+
+			.header-nav {
+				display: none;
+			}
+
+			.content {
+				padding-inline: 16px;
+			}
+
+			.features-row {
+				grid-template-columns: 1fr;
+			}
+
+			.bottom-row {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		@media (max-width: 600px) {
+			.hero {
+				padding: 20px 18px 22px;
+			}
+
+			.hero-title {
+				font-size: 1.4rem;
+			}
+		}
+	</style>
+<!-- ESTILOS UPLOAD -->
+	<style>
+		.upload-container {
+			background: #ffffff;
+			border-radius: 16px;
+			padding: 40px;
+			text-align: center;
+			box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+			margin-top: 20px;
+		}
+		.upload-area {
+			border: 2px dashed #1c9b5d;
+			border-radius: 12px;
+			padding: 50px 20px;
+			background: #f8fffb;
+			cursor: pointer;
+			transition: background 0.3s;
+			position: relative;
+		}
+		.upload-area:hover, .upload-area.dragover {
+			background: #e6f7ec;
+		}
+		.upload-icon {
+			font-size: 3rem;
+			color: #17a34a;
+			margin-bottom: 15px;
+		}
+		.upload-text {
+			font-size: 1.1rem;
+			color: #1f2933;
+			margin-bottom: 10px;
+			font-weight: 500;
+		}
+		.upload-subtext {
+			font-size: 0.9rem;
+			color: #7b8794;
+		}
+		#file-input {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			cursor: pointer;
+		}
+		.file-list {
+			margin-top: 20px;
+			text-align: left;
+		}
+		.file-item {
+			background: #f1f5f9;
+			padding: 10px 15px;
+			border-radius: 8px;
+			margin-bottom: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			font-size: 0.9rem;
+			color: #334155;
+		}
+		.remove-btn {
+			background: #ef4444;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			width: 24px;
+			height: 24px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.action-buttons {
+			margin-top: 30px;
+			display: flex;
+			justify-content: center;
+			gap: 15px;
+		}
+		.btn-outline {
+			background: transparent;
+			color: #1c4f82;
+			border: 2px solid #1c4f82;
+			border-radius: 999px;
+			padding: 10px 24px;
+			font-size: 0.98rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.2s;
+			text-decoration: none;
+			display: inline-block;
+		}
+		.btn-outline:hover {
+			background: #1c4f82;
+			color: #ffffff;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="app">
+		<!-- CONTENIDO PRINCIPAL -->
+		<main class="content">
+			<!-- HERO SIMPLIFICADO -->
+			<section class="hero" style="padding: 20px; background: #eef2f6; display: flex; justify-content: space-between; align-items: center; border-radius: 12px; margin-bottom: 20px;">
+				<div>
+					<h1 class="hero-title" style="font-size: 1.5rem; margin-bottom: 0;">Subir <span>Facturas en PDF</span></h1>
+					<p class="hero-subtitle" style="margin-bottom: 0;">Añade tus facturas para ser procesadas inteligentemente.</p>
+				</div>
+				<div>
+					<a href="inicio.html" class="btn-outline">⬅ Volver al Inicio</a>
+				</div>
+			</section>
+
+			<!-- ÁREA DE CARGA -->
+			<section class="upload-container">
+				<div class="upload-area" id="drop-zone">
+					<!-- Se usa accept=".pdf" para limitar a PDF -->
+					<input type="file" id="file-input" accept="application/pdf" multiple>
+					<div class="upload-icon">📄</div>
+					<div class="upload-text">Selecciona o arrastra tus facturas PDF aquí</div>
+					<div class="upload-subtext">Formatos permitidos: Solo PDF (Máx. 10MB por archivo)</div>
+				</div>
+
+				<!-- LISTA DE ARCHIVOS CARGADOS -->
+				<div id="file-list" class="file-list"></div>
+
+				<!-- BOTONES DE ACCIÓN (Inicialmente oculto) -->
+				<div class="action-buttons" id="action-buttons" style="display: none;">
+					<button class="btn-outline" id="clear-btn">Limpiar Todo</button>
+					<button class="btn-primary" id="process-btn">Subir y Procesar</button>
+				</div>
+			</section>
+
+		</main>
+	</div>
+
+	<script src="inicio.js"></script>
+</body>
+
+</html>
+

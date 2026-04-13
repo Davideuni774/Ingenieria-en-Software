@@ -73,11 +73,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.removeItem('rememberUser');
             }
 
+            // Guardar el nombre del usuario en localStorage para usarlo en otras páginas
+            if (data && data.data && data.data.nombre) {
+                localStorage.setItem('usuarioNombre', data.data.nombre);
+            }
+
             showAlert(data.message || 'Inicio de sesión exitoso.', 'success');
 
-            // Redirigir después de un pequeño delay (ajusta la URL según tu proyecto)
+            // Redirigir después de un pequeño delay
             setTimeout(() => {
-                window.location.href = 'Paginas/registronuevascuentas.html';
+                window.location.href = 'Paginas/paginasemergentes/inicio.html';
             }, 1500);
         } catch (error) {
             console.error('Error al conectar con la API de login:', error);

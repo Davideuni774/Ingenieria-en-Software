@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - FACTURASMART</title>
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        .hidden { display: none !important; }
+        .recovery-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .step-title { margin-bottom: 20px; color: #333; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 5px; color: #555; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        .btn:hover { background-color: #0056b3; }
+        .message { margin-top: 15px; padding: 10px; border-radius: 4px; display: none; }
+        .message.error { background-color: #f8d7da; color: #721c24; display: block; }
+        .message.success { background-color: #d4edda; color: #155724; display: block; }
+        .back-link { display: block; margin-top: 20px; color: #007bff; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="background-color: #f4f7f6; font-family: Arial, sans-serif;">
+
+<div class="recovery-container">
+    <div id="step-email">
+        <h2 class="step-title">Recuperar Contraseña</h2>
+        <p style="color: #666; margin-bottom: 20px; font-size: 14px;">Ingresa tu correo electrónico registrado para recuperar el acceso a tu cuenta.</p>
+        <form id="form-verify-email">
+            <div class="form-group">
+                <label for="recovery-email">Correo Electrónico:</label>
+                <input type="email" id="recovery-email" required placeholder="tu@correo.com">
+            </div>
+            <button type="submit" class="btn">Verificar Correo</button>
+        </form>
+        <div id="email-msg" class="message hidden"></div>
+        <a href="../index.html" class="back-link">Volver al Inicio de Sesión</a>
+    </div>
+
+    <div id="step-password" class="hidden">
+        <h2 class="step-title">Bienvenido(a), <span id="user-name-display" style="color: #007bff;"></span></h2>
+        <p style="color: #666; margin-bottom: 20px; font-size: 14px;">Por favor, ingresa tu nueva contraseña.</p>
+        <form id="form-change-password">
+            <input type="hidden" id="verified-email">
+            <div class="form-group">
+                <label for="new-password">Nueva Contraseña:</label>
+                <input type="password" id="new-password" required placeholder="Mínimo 6 caracteres" minlength="6">
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirmar Contraseña:</label>
+                <input type="password" id="confirm-password" required placeholder="Repite la contraseña" minlength="6">
+            </div>
+            <button type="submit" class="btn">Guardar Contraseña</button>
+        </form>
+        <div id="password-msg" class="message hidden"></div>
+        <a href="../index.html" class="back-link">Volver al Inicio de Sesión</a>
+    </div>
+</div>
+
+<script src="../recuperar_contrasena.js"></script>
+</body>
+</html>

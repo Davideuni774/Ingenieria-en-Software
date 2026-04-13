@@ -125,9 +125,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                 console.log('✅ Éxito:', msg);
                                 // Mostrar mensaje no modal en pantalla
                                 try { showToast(msg, 'success'); } catch (e) {}
-                                // Redirigir al perfil después de 1.5 segundos
+                                
+                                // Guardar el nombre del usuario (si existe en los datos) en localStorage para usarlo en otras páginas
+                                if (json.data && json.data.nombre) {
+                                    localStorage.setItem('usuarioNombre', json.data.nombre);
+                                }
+                                
+                                // Redirigir a inicio después de 1.5 segundos
                                 setTimeout(() => {
-                                    window.location.href = 'perfil.html';
+                                    window.location.href = SITE_ROOT + 'Paginas/paginasemergentes/inicio.html';
                                 }, 1500);
                             } else {
                                 console.warn('⚠️ Login no exitoso:', msg);

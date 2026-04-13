@@ -66,12 +66,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 correo: "' . addslashes($correo) . '",
                                 telefono: "' . addslashes($telefono) . '"
                             });
-                            console.log("Acción: Esperando 5 segundos antes de redirigir a la pantalla de inicio de sesión (Index.html)...");
+                            console.log("Acción: Esperando 5 segundos antes de redirigir a la pantalla de inicio de sesión (index.html)...");
                             console.groupEnd();
 
                             setTimeout(function() {
-                                console.info("[REGISTER] Redirigiendo ahora a Index.html para iniciar sesión.");
-                                window.location.href = "Index.html";
+                                console.info("[REGISTER] Redirigiendo ahora a index.html para iniciar sesión.");
+                                window.location.href = "index.html";
                             }, 5000);
                         </script>';
                         exit();
