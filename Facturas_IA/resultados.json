@@ -1,0 +1,269 @@
+[
+    {
+        "archivo": "541ded5270b00fd21f94fc3ac4a037b429d55265cf4f149591a2a66f449569ccbd3043e6902fd5cc1d9e68dee057323c.pdf",
+        "resultado": {
+            "estado": "PROCESADA",
+            "datos": {
+                "proveedor": "DOTATU HOTEL SAS",
+                "nit": "901930197",
+                "numero_factura": "FVF-18",
+                "fecha": "14/01/2026",
+                "subtotal": 23526281.0,
+                "iva": 4469993.39,
+                "total": 27996274.39,
+                "items": [
+                    {
+                        "descripcion": "JUEGO DE SABANAS 250 HILOS 160X190",
+                        "cantidad": 6.0,
+                        "precio_unit": 186919.0,
+                        "total": 1121514.0
+                    },
+                    {
+                        "descripcion": "JUEGO DE SABANAS 250 HILOS 200X200",
+                        "cantidad": 12.0,
+                        "precio_unit": 231049.0,
+                        "total": 2772588.0
+                    },
+                    {
+                        "descripcion": "TOALLA CUERPO ALGODON 500 GR 70X140",
+                        "cantidad": 70.0,
+                        "precio_unit": 36987.0,
+                        "total": 2589090.0
+                    },
+                    {
+                        "descripcion": "TOALLA MANOS ALGODON 500 GR 50X100",
+                        "cantidad": 17.0,
+                        "precio_unit": 73742.94,
+                        "total": 1253630.0
+                    },
+                    {
+                        "descripcion": "TOALLA TAPETE 600 GR 50X70",
+                        "cantidad": 28.0,
+                        "precio_unit": 28234.0,
+                        "total": 790552.0
+                    },
+                    {
+                        "descripcion": "DUVET 250 HILOS 140X1",
+                        "cantidad": 16.0,
+                        "precio_unit": 131774.0,
+                        "total": 2108384.0
+                    },
+                    {
+                        "descripcion": "DUVET 250 HILOS 160X1",
+                        "cantidad": 6.0,
+                        "precio_unit": 141504.0,
+                        "total": 849024.0
+                    },
+                    {
+                        "descripcion": "DUVET 250 HILOS 2X2",
+                        "cantidad": 12.0,
+                        "precio_unit": 161432.0,
+                        "total": 1937184.0
+                    },
+                    {
+                        "descripcion": "PLUMON FIBRA SILICON 140X190",
+                        "cantidad": 9.0,
+                        "precio_unit": 67824.0,
+                        "total": 610416.0
+                    },
+                    {
+                        "descripcion": "PLUMON FIBRA SILICON 160X190",
+                        "cantidad": 4.0,
+                        "precio_unit": 73094.0,
+                        "total": 292376.0
+                    },
+                    {
+                        "descripcion": "PLUMON FIBRA SILICON 200X200",
+                        "cantidad": 7.0,
+                        "precio_unit": 85094.0,
+                        "total": 595658.0
+                    },
+                    {
+                        "descripcion": "ALMOHADA FIBRA SILICONADA 700 GR DE 70X50",
+                        "cantidad": 68.0,
+                        "precio_unit": 23341.0,
+                        "total": 1587188.0
+                    },
+                    {
+                        "descripcion": "PROTECTOR DE COLCHON JERSEY PU 140X190",
+                        "cantidad": 8.0,
+                        "precio_unit": 36861.0,
+                        "total": 294888.0
+                    },
+                    {
+                        "descripcion": "PROTECTOR DE COLCHON JERSEY PU 160X190",
+                        "cantidad": 3.0,
+                        "precio_unit": 40565.0,
+                        "total": 121695.0
+                    },
+                    {
+                        "descripcion": "PROTECTOR DE COLCHON JERSEY PU 200X200",
+                        "cantidad": 6.0,
+                        "precio_unit": 49175.0,
+                        "total": 295050.0
+                    },
+                    {
+                        "descripcion": "PROTECTOR DE ALMOHADA JERSEY PU 50X70",
+                        "cantidad": 68.0,
+                        "precio_unit": 12063.0,
+                        "total": 820284.0
+                    },
+                    {
+                        "descripcion": "COBIJA FLEECE TIPO COLOR GRIS 1X1X1",
+                        "cantidad": 14.0,
+                        "precio_unit": 28532.0,
+                        "total": 399448.0
+                    },
+                    {
+                        "descripcion": "PIE DE CAMA",
+                        "cantidad": 14.0,
+                        "precio_unit": 42711.0,
+                        "total": 597954.0
+                    },
+                    {
+                        "descripcion": "PIE DE CAMA MICROFIBRA 140X190",
+                        "cantidad": 6.0,
+                        "precio_unit": 46171.0,
+                        "total": 277026.0
+                    },
+                    {
+                        "descripcion": "PIE DE CAMA MICROFIBRA 200X200",
+                        "cantidad": 12.0,
+                        "precio_unit": 55461.0,
+                        "total": 665532.0
+                    },
+                    {
+                        "descripcion": "COJIN MICROFIBRA 45X45",
+                        "cantidad": 34.0,
+                        "precio_unit": 28600.0,
+                        "total": 952600.0
+                    },
+                    {
+                        "descripcion": "JUEGO DE SABANAS 250 HILOS 140X190",
+                        "cantidad": 16.0,
+                        "precio_unit": 162175.0,
+                        "total": 2594800.0
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "archivo": "f10df9550536a15ea550e1e238f8073a08302e1060d6bd7d8dc86b0e429c5e4d433d1acea1ffb95ffcf1fc5828fbf137.pdf",
+        "resultado": {
+            "estado": "PROCESADA",
+            "datos": {
+                "proveedor": "DOTA TU HOTEL SAS",
+                "nit": "901930197-0",
+                "numero_factura": "FEV9550a1ba5e550a238f8073a083021e06d6b7d08d0c800d29c43c9d331dceb1fb95ffcffc5828f8137",
+                "fecha": "09/03/2026",
+                "subtotal": 6906546.0,
+                "iva": 1312243.74,
+                "total": 8218789.74,
+                "items": [
+                    {
+                        "descripcion": "JUEGO DE SABANAS MI SABANAS CROCFIBRA 140X190",
+                        "cantidad": 23.0,
+                        "precio_unit": 42630.0,
+                        "total": 980490.0
+                    },
+                    {
+                        "descripcion": "JUEGO DE SABANAS MI SABANAS CROCFIBRA 140X190",
+                        "cantidad": 23.0,
+                        "precio_unit": 48941.0,
+                        "total": 1125643.0
+                    },
+                    {
+                        "descripcion": "JUEGO DE SABANAS MI SABANAS HILOS 120X190",
+                        "cantidad": 1.0,
+                        "precio_unit": 69517.0,
+                        "total": 69517.0
+                    },
+                    {
+                        "descripcion": "JUEGO DE SABANAS MI SABANAS HILOS 120X190",
+                        "cantidad": 1.0,
+                        "precio_unit": 81205.0,
+                        "total": 81205.0
+                    },
+                    {
+                        "descripcion": "DUVET DUVET 250 HILOS 140X1",
+                        "cantidad": 1.0,
+                        "precio_unit": 129569.0,
+                        "total": 129569.0
+                    },
+                    {
+                        "descripcion": "TOALLAS TOALLA CUERPO 500 G 70X140",
+                        "cantidad": 72.0,
+                        "precio_unit": 30300.0,
+                        "total": 2181600.0
+                    },
+                    {
+                        "descripcion": "ALMOHADAS ALMOHADA FIBRA SILIC ON 140X190",
+                        "cantidad": 36.0,
+                        "precio_unit": 23569.0,
+                        "total": 848484.0
+                    },
+                    {
+                        "descripcion": "PROTECTORES PROTECTOR DE COLCH ON JESEY PU 140X190",
+                        "cantidad": 12.0,
+                        "precio_unit": 32809.0,
+                        "total": 393708.0
+                    },
+                    {
+                        "descripcion": "PROTECTORES PROTECTOR DE COLCH ON JESEY PU 140X190",
+                        "cantidad": 12.0,
+                        "precio_unit": 36290.0,
+                        "total": 435480.0
+                    },
+                    {
+                        "descripcion": "COBIJAS COBIJA FLEECE 200 G 140X190",
+                        "cantidad": 5.0,
+                        "precio_unit": 47678.0,
+                        "total": 238390.0
+                    },
+                    {
+                        "descripcion": "PROTECTORES PROTECTOR DE ALMOH ADA JESEY PU 70X50",
+                        "cantidad": 36.0,
+                        "precio_unit": 11735.0,
+                        "total": 422460.0
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "archivo": "factura.jpg",
+        "resultado": {
+            "estado": "PROCESADA",
+            "datos": {
+                "proveedor": null,
+                "nit": null,
+                "numero_factura": null,
+                "fecha": null,
+                "subtotal": null,
+                "iva": null,
+                "total": null,
+                "items": [
+                    {
+                        "descripcion": "Caucho",
+                        "cantidad": null,
+                        "precio_unit": 100.0,
+                        "total": 147.0
+                    },
+                    {
+                        "descripcion": "Metal",
+                        "cantidad": null,
+                        "precio_unit": 255.0,
+                        "total": 499.0
+                    },
+                    {
+                        "descripcion": "Estuco Plastica",
+                        "cantidad": null,
+                        "precio_unit": 4200.0,
+                        "total": 500.0
+                    }
+                ]
+            }
+        }
+    }
+]
