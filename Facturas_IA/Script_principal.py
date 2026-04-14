@@ -5,6 +5,7 @@ from typing import List, Optional
 from pydantic import BaseModel, Field
 from fastapi import FastAPI, UploadFile, File, HTTPException, status
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pdf2image import convert_from_bytes
 from PIL import Image
 from google import genai
@@ -14,9 +15,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class AppConfig:
-    POPPLER_PATH = os.getenv("POPPLER_PATH")
+    # En Render/Linux no se suele necesitar ruta manual, se detecta solo
+    POPPLER_PATH = os.getenv("POPPLER_PATH", None) 
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-    MODEL_NAME = os.getenv("MODEL", "gemini-2.5-flash")
+    # Ojo: el modelo actual más estable es gemini-1.5-flash (revisa el nombre)
+    MODEL_NAME = os.getenv("MODEL", "gemini-1.5-flash") 
     MAX_PDF_PAGES = 8
     IMAGE_SIZE = (1200, 1200)
 
@@ -115,6 +118,16 @@ def procesar_archivo(file_bytes: bytes, filename: str) -> dict:
 
 # API
 app = FastAPI(title="API Facturas IA", version="1.0")
+
+# CORS: permitir llamadas desde tu frontend (ajusta los orígenes en producción)
+app.add_middleware(
+    CORSMiddleware,
+    # Dominio público de tu frontend en InfinityFree
+    allow_origins=["https://facturasmart.page.gd"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/procesar")
 async def procesar_facturas(files: List[UploadFile] = File(...)):
