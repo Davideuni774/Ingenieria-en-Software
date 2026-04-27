@@ -63,6 +63,5 @@ document.addEventListener('DOMContentLoaded', async function () {
 });
 
 function verDetalles(idFactura) {
-    alert('Función "Ver Detalles" para la factura ID ' + idFactura + ' en desarrollo.');
-    // Aquí se implementará la ventana modal para ver las columnas adicionales: subtotal, iva, etc.
+    window.location.href = 'detalle_factura.html?id=' + encodeURIComponent(idFactura);
 }

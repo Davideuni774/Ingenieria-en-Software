@@ -15,13 +15,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class AppConfig:
-    # En Render/Linux no se suele necesitar ruta manual, se detecta solo
-    POPPLER_PATH = os.getenv("POPPLER_PATH", None) 
-    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-    # Ojo: el modelo actual más estable es gemini-1.5-flash (revisa el nombre)
-    MODEL_NAME = os.getenv("MODEL", "gemini-1.5-flash") 
+    POPPLER_PATH = os.getenv("POPPLER_PATH", None)
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEYS")
+    MODEL_NAME = os.getenv("MODEL", "gemini-flash-latest")
     MAX_PDF_PAGES = 8
     IMAGE_SIZE = (1200, 1200)
+
 
 if not AppConfig.GEMINI_API_KEY:
     raise ValueError("Falta GEMINI_API_KEY")
@@ -128,7 +127,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 @app.post("/procesar")
 async def procesar_facturas(files: List[UploadFile] = File(...)):
     if not files:

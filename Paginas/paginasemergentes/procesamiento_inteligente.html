@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Procesamiento Inteligente - FacturaSmart</title>
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		}
+
+		body {
+			background: #f3f5fb;
+			color: #1f2933;
+		}
+
+		.app {
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.content {
+			max-width: 980px;
+			margin: 0 auto;
+			padding: 24px 20px 40px;
+			width: 100%;
+		}
+
+		.hero {
+			background: linear-gradient(90deg, #e9f4ff 0%, #f5fbff 70%);
+			border-radius: 16px;
+			padding: 26px 28px 30px;
+			margin-bottom: 22px;
+		}
+
+		.hero h1 {
+			font-size: 1.65rem;
+			color: #1c4f82;
+			margin-bottom: 8px;
+		}
+
+		.hero p {
+			color: #5a6b7f;
+			line-height: 1.5;
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 18px;
+		}
+
+		.card {
+			background: #ffffff;
+			border-radius: 14px;
+			padding: 18px 20px;
+			box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+		}
+
+		.card h2 {
+			font-size: 1.05rem;
+			color: #102a43;
+			margin-bottom: 10px;
+		}
+
+		.card ul {
+			padding-left: 18px;
+			color: #4b5a6b;
+			line-height: 1.6;
+			font-size: 0.92rem;
+		}
+
+		.card p {
+			color: #4b5a6b;
+			line-height: 1.6;
+			font-size: 0.92rem;
+		}
+
+		.tip {
+			margin-top: 18px;
+			background: #ecfdf3;
+			border: 1px solid #bbf7d0;
+			color: #166534;
+			padding: 12px 14px;
+			border-radius: 10px;
+			font-size: 0.9rem;
+		}
+
+		.actions {
+			margin-top: 22px;
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		.btn {
+			border: none;
+			border-radius: 999px;
+			padding: 11px 22px;
+			font-size: 0.92rem;
+			font-weight: 600;
+			cursor: pointer;
+			text-decoration: none;
+			display: inline-block;
+		}
+
+		.btn-primary {
+			background: #17a34a;
+			color: #fff;
+		}
+
+		.btn-secondary {
+			background: #e5edff;
+			color: #1d4ed8;
+		}
+
+		@media (max-width: 860px) {
+			.grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="app">
+		<main class="content">
+			<section class="hero">
+				<h1>Guia de Procesamiento Inteligente</h1>
+				<p>
+					Esta seccion te explica como FacturaSmart analiza tus PDFs para extraer datos clave de cada factura.
+				</p>
+			</section>
+
+			<section class="grid">
+				<article class="card">
+					<h2>Como funciona</h2>
+					<ul>
+						<li>Subes uno o varios archivos PDF de facturas.</li>
+						<li>El sistema aplica OCR y lectura estructurada.</li>
+						<li>Detecta campos como numero, proveedor, fecha, subtotal, IVA y total.</li>
+						<li>Valida formato y guarda resultados procesados en la base de datos.</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h2>Buenas practicas</h2>
+					<ul>
+						<li>Usa PDFs legibles y sin borrones.</li>
+						<li>Evita imagenes recortadas o muy oscuras.</li>
+						<li>Si una factura falla, vuelve a subirla con mejor calidad.</li>
+						<li>Confirma los datos en historial antes de exportar a Excel.</li>
+					</ul>
+				</article>
+			</section>
+
+			<section class="card" style="margin-top: 18px;">
+				<h2>Estados que puedes ver</h2>
+				<p>
+					Procesado: la factura fue leida correctamente y almacenada. Si no aparece en historial, revisa que estes logueado con la cuenta correcta.
+				</p>
+				<div class="tip">
+					Tip: despues de subir facturas, espera a que termine el procesamiento y luego revisa el estado en Inicio o en Historial.
+				</div>
+			</section>
+
+			<div class="actions">
+				<a class="btn btn-primary" href="subir_facturas.html">Ir a Subir Facturas</a>
+				<a class="btn btn-secondary" href="inicio.html">Volver a Inicio</a>
+			</div>
+		</main>
+	</div>
+
+	<script src="inicio.js"></script>
+</body>
+
+</html>
