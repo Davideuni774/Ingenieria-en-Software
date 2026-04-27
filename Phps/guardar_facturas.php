@@ -64,8 +64,8 @@ if (empty($data['facturas']) || !is_array($data['facturas'])) {
 $stmtFactura = $conn_facturas->prepare("INSERT INTO facturas (
     cliente_nombre, nit, numero_factura, fecha,
     subtotal, iva, total,
-    pdf_nombre, pdf_url
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    pdf_nombre, pdf_url, id_usuario
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 if (!$stmtFactura) {
     http_response_code(500);
@@ -116,9 +116,12 @@ foreach ($data['facturas'] as $facturaRaw) {
     $pdfNombre = $archivo;
     $pdfUrl    = null; // si luego guardas ruta/URL del archivo, ponla aquí
 
+    // Suponiendo que el frontend envía el id_usuario en el JSON o viene de session
+    $idUsuario = isset($data['id_usuario']) ? (int)$data['id_usuario'] : null;
+
     // Vincular parámetros e insertar en `facturas`
     $stmtFactura->bind_param(
-        'ssssddsss',
+        'ssssddsssi',
         $clienteNombre,
         $nit,
         $numeroFactura,
@@ -127,7 +130,8 @@ foreach ($data['facturas'] as $facturaRaw) {
         $iva,
         $total,
         $pdfNombre,
-        $pdfUrl
+        $pdfUrl,
+        $idUsuario
     );
 
     if (!$stmtFactura->execute()) {

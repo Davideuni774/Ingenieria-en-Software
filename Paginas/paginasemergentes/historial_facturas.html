@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Historial de Facturas - FacturaSmart</title>
+
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		}
+
+		body {
+			background: #f3f5fb;
+			color: #1f2933;
+		}
+
+		.app {
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		/* ---------------- CONTENIDO PRINCIPAL ---------------- */
+		.content {
+			max-width: 1120px;
+			margin: 0 auto;
+			padding: 24px 20px 40px;
+			flex: 1;
+		}
+
+		/* ---------------- TABLA HISTORIAL ---------------- */
+		.section-title {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: #102a43;
+			margin-bottom: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.card-table {
+			background: #ffffff;
+			border-radius: 14px;
+			box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+			overflow: hidden;
+			margin-bottom: 22px;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 0.9rem;
+		}
+
+		thead {
+			background: #f5f7fa;
+		}
+
+		th,
+		td {
+			padding: 12px 18px;
+			text-align: left;
+		}
+
+		th {
+			font-weight: 600;
+			color: #6b7785;
+			font-size: 0.83rem;
+			text-transform: uppercase;
+		}
+
+		tbody tr:nth-child(even) {
+			background: #f9fbff;
+		}
+
+		tbody tr:hover {
+			background: #eef4ff;
+		}
+
+		.btn-secondary {
+			border-radius: 999px;
+			border: none;
+			background: #1d4ed8;
+			color: #fff;
+			padding: 8px 16px;
+			font-size: 0.8rem;
+			font-weight: 600;
+			cursor: pointer;
+		}
+
+		.btn-secondary:hover {
+			background: #1e40af;
+		}
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #7b8794;
+        }
+
+		@media (max-width: 900px) {
+			.content {
+				padding-inline: 16px;
+			}
+		}
+
+	</style>
+</head>
+
+<body>
+	<div class="app">
+		<!-- CONTENIDO PRINCIPAL -->
+		<main class="content">
+			<section>
+				<div class="section-title">
+					<h2>Mi Historial de Facturas</h2>
+				</div>
+                <div id="loading-message" style="margin-bottom: 20px; color: #1d4ed8; font-weight: bold;">Cargando historial...</div>
+				<div class="card-table">
+					<table>
+						<thead>
+							<tr>
+								<th>Número de Factura</th>
+								<th>Emisor (NIT)</th>
+								<th>Fecha</th>
+								<th>Total</th>
+								<th>Archivo PDF</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody id="tabla-historial">
+							<!-- Los datos se inyectarán aquí vía JS -->
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<!-- Script Global Header/Sidebar -->
+	<script src="inicio.js"></script>
+    <!-- Script para obtener los datos -->
+    <script src="historial_facturas.js"></script>
+</body>
+
+</html>

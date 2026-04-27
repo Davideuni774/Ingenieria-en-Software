@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const xhr = new XMLHttpRequest();
                 const base = REMOTE_ORIGIN ? (REMOTE_ORIGIN + '/api/post') : (SITE_ROOT + 'api/post');
-                xhr.open('POST', base + "/login-cuenta.php", true);
+                xhr.open('POST', base + "/login.php", true);
                 if (REMOTE_ORIGIN) {
                     xhr.withCredentials = true; // permitir cookies/sesión entre dominios
                 }
@@ -127,8 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 try { showToast(msg, 'success'); } catch (e) {}
                                 
                                 // Guardar el nombre del usuario (si existe en los datos) en localStorage para usarlo en otras páginas
-                                if (json.data && json.data.nombre) {
-                                    localStorage.setItem('usuarioNombre', json.data.nombre);
+                                if (json.data) {
+                                    if (json.data.nombre) localStorage.setItem('usuarioNombre', json.data.nombre);
+                                    if (json.data.id) localStorage.setItem('usuarioId', json.data.id);
                                 }
                                 
                                 // Redirigir a inicio después de 1.5 segundos

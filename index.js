@@ -74,8 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Guardar el nombre del usuario en localStorage para usarlo en otras páginas
-            if (data && data.data && data.data.nombre) {
-                localStorage.setItem('usuarioNombre', data.data.nombre);
+            if (data && data.data) {
+                if (data.data.nombre) localStorage.setItem('usuarioNombre', data.data.nombre);
+                if (data.data.id) localStorage.setItem('usuarioId', data.data.id);
             }
 
             showAlert(data.message || 'Inicio de sesión exitoso.', 'success');

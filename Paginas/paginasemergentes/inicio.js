@@ -136,8 +136,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			<nav class="header-nav">
 				<a href="${basePath}inicio.html" class="${currentPath === 'inicio.html' || currentPath === '' ? 'active' : ''}">Inicio</a>
-				<a href="#">Historial</a>
-				<a href="#">Exportar a Excel</a>
+				<a href="${basePath}historial_facturas.html" class="${currentPath === 'historial_facturas.html' ? 'active' : ''}">Historial</a>
+				<a href="javascript:exportarExcel()" class="${currentPath === 'exportar_excel.html' ? 'active' : ''}">Exportar a Excel</a>
 			</nav>
 
 			<div class="header-right">
@@ -172,3 +172,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (userElement) userElement.textContent = userName;
     }
 });
+
+// Exponemos la función globalmente para que se use en botones y links
+window.exportarExcel = function () {
+    const isInPaginasEmergentes = window.location.pathname.toLowerCase().includes('paginasemergentes/');
+    const exportarRoute = isInPaginasEmergentes ? 'exportar_excel.html' : 'paginasemergentes/exportar_excel.html';
+    window.location.href = exportarRoute;
+};

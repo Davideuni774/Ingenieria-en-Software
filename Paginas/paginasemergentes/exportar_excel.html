@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Exportar a Excel - FacturaSmart</title>
+
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		}
+
+		body {
+			background: #f3f5fb;
+			color: #1f2933;
+		}
+
+		.app {
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		/* ---------------- CONTENIDO PRINCIPAL ---------------- */
+		.content {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 24px 20px 40px;
+			flex: 1;
+			width: 100%;
+		}
+
+		.section-title {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: #102a43;
+			margin-bottom: 8px;
+		}
+
+		.section-subtitle {
+			font-size: 0.95rem;
+			color: #7b8794;
+			margin-bottom: 24px;
+		}
+
+		.card-form {
+			background: #ffffff;
+			border-radius: 14px;
+			box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+			padding: 30px;
+			margin-bottom: 22px;
+		}
+
+		.form-group {
+			margin-bottom: 20px;
+		}
+
+		.form-group label {
+			display: block;
+			font-weight: 500;
+			color: #4a5568;
+			margin-bottom: 8px;
+			font-size: 0.9rem;
+		}
+
+		.form-control {
+			width: 100%;
+			padding: 12px 14px;
+			border: 1px solid #d8e2ec;
+			border-radius: 8px;
+			font-size: 0.95rem;
+			color: #102a43;
+			transition: border-color 0.2s, box-shadow 0.2s;
+		}
+
+		.form-control:focus {
+			outline: none;
+			border-color: #1c9b5d;
+			box-shadow: 0 0 0 3px rgba(28, 155, 93, 0.15);
+		}
+
+		.grid-2 {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 16px;
+		}
+
+		.btn-primary {
+			background: #17a34a;
+			color: #ffffff;
+			border-radius: 8px;
+			padding: 14px 28px;
+			border: none;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			width: 100%;
+			box-shadow: 0 8px 18px rgba(23, 163, 74, 0.25);
+			transition: transform 0.12s ease, box-shadow 0.12s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+		}
+
+		.btn-primary:hover {
+			transform: translateY(-1px);
+			box-shadow: 0 12px 22px rgba(23, 163, 74, 0.35);
+		}
+
+		@media (max-width: 600px) {
+			.grid-2 {
+				grid-template-columns: 1fr;
+			}
+		}
+
+	</style>
+</head>
+
+<body>
+	<div class="app">
+		<!-- CONTENIDO PRINCIPAL -->
+		<main class="content">
+			<section>
+				<h2 class="section-title">Generar Reporte Excel</h2>
+				<p class="section-subtitle">Filtra las facturas que deseas descargar o déjalo en blanco para descargar todo el historial.</p>
+				
+				<div class="card-form">
+					<form id="formExportar" onsubmit="generarReporte(event)">
+						
+						<div class="grid-2">
+							<div class="form-group">
+								<label for="fecha_inicio">Fecha Inicio (Opcional)</label>
+								<input type="date" id="fecha_inicio" class="form-control">
+							</div>
+							
+							<div class="form-group">
+								<label for="fecha_fin">Fecha Fin (Opcional)</label>
+								<input type="date" id="fecha_fin" class="form-control">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="emisor">Nombre del Emisor (Opcional)</label>
+							<input type="text" id="emisor" class="form-control" placeholder="Ej. Computadores S.A.S">
+						</div>
+
+						<button type="submit" class="btn-primary">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+								<polyline points="7 10 12 15 17 10"></polyline>
+								<line x1="12" y1="15" x2="12" y2="3"></line>
+							</svg>
+							Descargar Reporte
+						</button>
+					</form>
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<!-- Script Global Header/Sidebar -->
+	<script src="inicio.js"></script>
+    <script>
+        function generarReporte(e) {
+            e.preventDefault();
+            
+            const usuarioId = localStorage.getItem('usuarioId') || '';
+            if (!usuarioId) {
+                alert('No se pudo identificar el usuario. Recuerda iniciar sesión.');
+                return;
+            }
+
+            const fechaInicio = document.getElementById('fecha_inicio').value;
+            const fechaFin = document.getElementById('fecha_fin').value;
+            const emisor = document.getElementById('emisor').value.trim();
+
+            const isInPaginasEmergentes = window.location.pathname.toLowerCase().includes('paginasemergentes/');
+            const apiPath = isInPaginasEmergentes ? '../../api/post/exportar_excel.php' : '../api/post/exportar_excel.php';
+
+            const url = new URL(apiPath, window.location.href);
+            url.searchParams.append('usuario_id', usuarioId);
+            
+            if (fechaInicio) url.searchParams.append('fecha_inicio', fechaInicio);
+            if (fechaFin) url.searchParams.append('fecha_fin', fechaFin);
+            if (emisor) url.searchParams.append('emisor', emisor);
+
+            window.open(url.toString(), '_blank');
+        }
+    </script>
+</body>
+
+</html>

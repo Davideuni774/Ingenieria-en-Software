@@ -122,6 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // 2) Enviar el JSON resultante a PHP para guardarlo en MySQL
             try {
+                // Inyectamos el ID de usuario si existe
+                data.id_usuario = localStorage.getItem('usuarioId') || null;
+                
                 const guardarResp = await fetch("../../Phps/guardar_facturas.php", {
                     method: "POST",
                     headers: {

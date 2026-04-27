@@ -59,6 +59,7 @@ if (isset($row['clave']) && password_verify($clave, $row['clave'])) {
         "success" => true,
         "message" => "Inicio de sesión exitoso.",
         "data" => [
+            "id" => $row['id'],
             "nombre" => $row['nombre'],
             "correo" => $row['correo']
         ]
