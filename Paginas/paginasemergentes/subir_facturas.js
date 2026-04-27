@@ -122,9 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // 2) Enviar el JSON resultante a PHP para guardarlo en MySQL
             try {
-                // Inyectamos el ID de usuario si existe
-                data.id_usuario = localStorage.getItem('usuarioId') || null;
-                
                 const guardarResp = await fetch("../../Phps/guardar_facturas.php", {
                     method: "POST",
                     headers: {
@@ -140,9 +137,53 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                const guardarData = await guardarResp.json().catch(() => null);
+                const respuestaTexto = await guardarResp.text();
+                let guardarData = null;
+                try {
+                    guardarData = respuestaTexto ? JSON.parse(respuestaTexto) : null;
+                } catch (_) {
+                    guardarData = { raw: respuestaTexto };
+                }
+
                 console.log("Respuesta guardar_facturas.php:", guardarData);
-                alert("Facturas procesadas y guardadas correctamente.");
+
+                // En lugar del alert bloqueante, mostramos el mensaje con el temporizador
+                const successMessage = document.getElementById("success-message");
+                const countdownSeconds = document.getElementById("countdown-seconds");
+                const actionButtons = document.getElementById("action-buttons");
+                const dropZone = document.getElementById("drop-zone");
+                const fileListContainer = document.getElementById("file-list");
+
+                if(successMessage) {
+                    successMessage.style.display = "block";
+                    actionButtons.style.display = "none";
+                    dropZone.style.display = "none";
+                    fileListContainer.style.display = "none";
+
+                    if (countdownSeconds) {
+                        countdownSeconds.innerText = "15";
+                    }
+
+                    if (window.__facturaTimer) {
+                        clearInterval(window.__facturaTimer);
+                    }
+
+                    let segundos = 15;
+                    window.__facturaTimer = setInterval(() => {
+                        segundos--;
+                        if (countdownSeconds) countdownSeconds.innerText = segundos;
+
+                        if (segundos <= 0) {
+                            clearInterval(window.__facturaTimer);
+                            window.__facturaTimer = null;
+                            window.location.replace('inicio.html');
+                        }
+                    }, 1000);
+                } else {
+                    // Fallback
+                    alert("Facturas procesadas y guardadas correctamente.");
+                    window.location.replace('inicio.html');
+                }
             } catch (e) {
                 console.error("Fallo al llamar a guardar_facturas.php", e);
                 alert("Las facturas se procesaron, pero no se pudieron guardar en la base de datos.");

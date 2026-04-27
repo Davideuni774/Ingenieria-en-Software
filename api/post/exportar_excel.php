@@ -7,10 +7,7 @@ if (!isset($conn_facturas) || $conn_facturas->connect_errno) {
     die("Error de conexión a la BD.");
 }
 
-$id_usuario = isset($_GET['usuario_id']) ? (int)$_GET['usuario_id'] : 0;
-if ($id_usuario === 0 && isset($_SESSION['usuario_id'])) {
-    $id_usuario = (int)$_SESSION['usuario_id'];
-}
+$id_usuario = isset($_SESSION['usuario_id']) ? (int)$_SESSION['usuario_id'] : 0;
 
 if ($id_usuario === 0) {
     die("Usuario no autenticado para exportar facturas.");
@@ -20,6 +17,16 @@ if ($id_usuario === 0) {
 $fecha_inicio = $_GET['fecha_inicio'] ?? '';
 $fecha_fin = $_GET['fecha_fin'] ?? '';
 $emisor = $_GET['emisor'] ?? '';
+
+// Helper para bind_param dinámico
+function bindParamsDinamicos($stmt, $types, $params)
+{
+    $bind = [$types];
+    foreach ($params as $k => $v) {
+        $bind[] = &$params[$k];
+    }
+    call_user_func_array([$stmt, 'bind_param'], $bind);
+}
 
 // Sentencia base
 $sql = "SELECT numero_factura, cliente_nombre, nit, fecha, subtotal, iva, total FROM facturas WHERE id_usuario = ?";
@@ -46,21 +53,11 @@ $sql .= " ORDER BY fecha DESC, id DESC";
 
 $stmt = $conn_facturas->prepare($sql);
 if (!$stmt) {
-    // Fallback si no existe la columna id_usuario
-    $sql_fallback = str_replace("WHERE id_usuario = ?", "WHERE 1=1", $sql);
-    $stmt = $conn_facturas->prepare($sql_fallback);
-    if($stmt) {
-        $stmt->execute($params); // Requiere PHP 8.1+
-    }
-} else {
-    // Vincular dinámicamente
-    $bind_names[] = $types;
-    for ($i = 0; $i < count($params); $i++) {
-        $bind_names[] = &$params[$i];
-    }
-    call_user_func_array(array($stmt, 'bind_param'), $bind_names);
-    $stmt->execute();
+    die("No se pudo preparar la consulta. Verifica que exista la columna id_usuario en facturas.");
 }
+
+bindParamsDinamicos($stmt, $types, $params);
+$stmt->execute();
 $result = $stmt->get_result();
 
 // Configurar las cabeceras para forzar la descarga de un archivo CSV

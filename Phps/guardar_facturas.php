@@ -4,6 +4,7 @@
 // y guarda la información en las tablas `facturas` y `factura_items`.
 
 header('Content-Type: application/json; charset=utf-8');
+session_start();
 
 // Usamos una conexión separada para la BD de facturas
 require_once __DIR__ . '/db_facturas.php';
@@ -26,6 +27,16 @@ if (!is_array($data)) {
     echo json_encode([
         'ok' => false,
         'error' => 'JSON inválido o vacío'
+    ]);
+    exit;
+}
+
+$idUsuario = isset($_SESSION['usuario_id']) ? (int)$_SESSION['usuario_id'] : 0;
+if ($idUsuario === 0) {
+    http_response_code(401);
+    echo json_encode([
+        'ok' => false,
+        'error' => 'Usuario no autenticado. Inicia sesión nuevamente.'
     ]);
     exit;
 }
@@ -115,9 +126,6 @@ foreach ($data['facturas'] as $facturaRaw) {
 
     $pdfNombre = $archivo;
     $pdfUrl    = null; // si luego guardas ruta/URL del archivo, ponla aquí
-
-    // Suponiendo que el frontend envía el id_usuario en el JSON o viene de session
-    $idUsuario = isset($data['id_usuario']) ? (int)$data['id_usuario'] : null;
 
     // Vincular parámetros e insertar en `facturas`
     $stmtFactura->bind_param(

@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						<img src="#" alt="Foto de usuario">
 					</div>
 				</div>
-				<a href="${indexRoute}" onclick="localStorage.removeItem('usuarioNombre');" style="margin-left:12px;font-size:0.8rem;color:#7b8794;text-decoration:none;font-weight:500;">Cerrar sesión</a>
+				<a href="${indexRoute}" onclick="localStorage.removeItem('usuarioNombre'); localStorage.removeItem('usuarioId');" style="margin-left:12px;font-size:0.8rem;color:#7b8794;text-decoration:none;font-weight:500;">Cerrar sesión</a>
 			</div>
 		</header>
     `;
@@ -179,3 +179,59 @@ window.exportarExcel = function () {
     const exportarRoute = isInPaginasEmergentes ? 'exportar_excel.html' : 'paginasemergentes/exportar_excel.html';
     window.location.href = exportarRoute;
 };
+
+// Cargar facturas procesadas recientemente en el dashboard (inicio.html)
+document.addEventListener("DOMContentLoaded", async function () {
+    const tablaProcesamiento = document.getElementById("tabla-procesamiento");
+    if (!tablaProcesamiento) return; // Solo ejecutar si existe la tabla (ej. en inicio)
+
+    const isInPaginasEmergentes = window.location.pathname.toLowerCase().includes('paginasemergentes/');
+    const apiPath = isInPaginasEmergentes ? '../../api/post/obtener_historial.php' : '../api/post/obtener_historial.php';
+
+    try {
+        const url = new URL(apiPath, window.location.href);
+
+        const res = await fetch(url.toString(), {
+            method: 'GET',
+            headers: { 'Accept': 'application/json' }
+        });
+        
+        const json = await res.json();
+        
+        if (!res.ok || !json.success) {
+            tablaProcesamiento.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #ef4444;">No se pudo conectar a la base de datos</td></tr>`;
+            return;
+        }
+
+        const facturas = json.data || [];
+        if (facturas.length === 0) {
+            tablaProcesamiento.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #7b8794;">No tienes facturas subidas aún.</td></tr>`;
+            return;
+        }
+
+        // Limpiar la tabla de carga y mostrar solo las últimas 4 o 5
+        tablaProcesamiento.innerHTML = '';
+        const limitadas = facturas.slice(0, 5);
+
+        limitadas.forEach(f => {
+            const tr = document.createElement("tr");
+            const numFactura = f.numero_factura || "S/N";
+            const emisor = f.emisor || "Desconocido";
+            const fecha = f.fecha || "S/F";
+            
+            // Recordando que nuestro PHP en "guardar_facturas.php" actualmente solo guarda las que pasan por IA como 'PROCESADA'
+            // todo lo que llegue desde tu Base de Datos ya está asegurado como 'Procesado' con éxito
+            tr.innerHTML = `
+                <td style="font-weight: 500;">${numFactura}</td>
+                <td>${emisor}</td>
+                <td>${fecha}</td>
+                <td><span class="status-badge status-procesado">Procesado</span></td>
+            `;
+            tablaProcesamiento.appendChild(tr);
+        });
+
+    } catch (e) {
+        console.error("Error al cargar estado de facturas:", e);
+        tablaProcesamiento.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #ef4444;">Error de red</td></tr>`;
+    }
+});

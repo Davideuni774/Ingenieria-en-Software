@@ -169,12 +169,6 @@
     <script>
         function generarReporte(e) {
             e.preventDefault();
-            
-            const usuarioId = localStorage.getItem('usuarioId') || '';
-            if (!usuarioId) {
-                alert('No se pudo identificar el usuario. Recuerda iniciar sesión.');
-                return;
-            }
 
             const fechaInicio = document.getElementById('fecha_inicio').value;
             const fechaFin = document.getElementById('fecha_fin').value;
@@ -184,8 +178,6 @@
             const apiPath = isInPaginasEmergentes ? '../../api/post/exportar_excel.php' : '../api/post/exportar_excel.php';
 
             const url = new URL(apiPath, window.location.href);
-            url.searchParams.append('usuario_id', usuarioId);
-            
             if (fechaInicio) url.searchParams.append('fecha_inicio', fechaInicio);
             if (fechaFin) url.searchParams.append('fecha_fin', fechaFin);
             if (emisor) url.searchParams.append('emisor', emisor);

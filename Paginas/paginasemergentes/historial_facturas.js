@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const tablaHistorial = document.getElementById('tabla-historial');
     const loadingMessage = document.getElementById('loading-message');
-    const usuarioId = localStorage.getItem('usuarioId') || '';
 
     // URL para obtener el historial
     const isInPaginasEmergentes = window.location.pathname.toLowerCase().includes('paginasemergentes/');
@@ -9,9 +8,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     try {
         const url = new URL(apiPath, window.location.href);
-        if (usuarioId) {
-            url.searchParams.append('usuario_id', usuarioId);
-        }
 
         const respuesta = await fetch(url.toString(), {
             method: 'GET',
